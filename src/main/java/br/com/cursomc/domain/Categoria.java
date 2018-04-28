@@ -26,6 +26,14 @@ public class Categoria implements Serializable {
 		this.id = id;
 	}
 
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -56,4 +64,5 @@ public class Categoria implements Serializable {
 			return false;
 		return true;
 	}
+
 }
