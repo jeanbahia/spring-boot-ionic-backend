@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import br.com.cursomc.resources.StandardError;
 import br.com.cursomc.services.exception.ObjectNotFoundException;
 
 @ControllerAdvice
