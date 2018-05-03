@@ -6,7 +6,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.cursomc.domain.enums.TipoCliente;
 
@@ -15,6 +23,8 @@ public class Cliente implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	private String nome;
@@ -25,9 +35,16 @@ public class Cliente implements Serializable {
 
 	private Integer tipo;
 
+	@JsonManagedReference
+	@OneToMany(mappedBy = "cliente")
 	private List<Endereco> enderecos = new ArrayList<>();
 
-	private Set<String> selefones = new HashSet<>();
+	@ElementCollection
+	@CollectionTable(name = "TELEFONE")
+	private Set<String> telefones = new HashSet<>();
+
+	@OneToMany(mappedBy = "cliente")
+	private List<Pedido> pedidos = new ArrayList<>();
 
 	public Cliente() {
 
@@ -65,10 +82,6 @@ public class Cliente implements Serializable {
 		return enderecos;
 	}
 
-	public Set<String> getSelefones() {
-		return selefones;
-	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -93,8 +106,24 @@ public class Cliente implements Serializable {
 		this.enderecos = enderecos;
 	}
 
-	public void setSelefones(Set<String> selefones) {
-		this.selefones = selefones;
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setTipo(Integer tipo) {
+		this.tipo = tipo;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+
+	public Set<String> getTelefones() {
+		return telefones;
+	}
+
+	public void setTelefones(Set<String> telefones) {
+		this.telefones = telefones;
 	}
 
 	@Override
